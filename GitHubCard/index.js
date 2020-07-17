@@ -4,9 +4,9 @@
     https://api.github.com/users/<your name>
 */
 axios.get('https://api.github.com/users/tonysorensen')
-.then( success => {
-  console.log(success)
-  const newCard = userCard(success)
+.then( object => {
+  console.log("Success! Here's your object!", object)
+  const newCard = userCard(object)
 entryPoint.appendChild(newCard)
 })
 .catch( err => {
@@ -59,7 +59,7 @@ const followersArray = ['LoganSorensen','peterevilla','tetondan','dustinmyers','
       </div>
     </div>
 */
-const userCard = (success) => {
+const userCard = (object) => {
   //create the elements
 const userCard = document.createElement('div')
 const avatar = document.createElement('img')
@@ -84,33 +84,36 @@ info.appendChild(followers)
 info.appendChild(following)
 info.appendChild(bio)
 //add the content
-avatar.src = success.data.avatar_url
-name.textContent = success.data.name
-userName.textContent = success.data.login
-userLocation.textContent = success.data.location
-link.textContent = success.data.html_url
-followers.textContent = success.data.followers
-following.textContent = success.data.following
+avatar.src = object.data.avatar_url
+name.textContent = object.data.name
+userName.textContent = object.data.login
+userLocation.textContent = object.data.location
+link.textContent = object.data.html_url
+followers.textContent = object.data.followers
+following.textContent = object.data.following
 //add the classes
 userCard.classList.add('card')
 info.classList.add('card-info')
 name.classList.add('name')
 userName.classList.add('username')
-
+//make link functional
+link.setAttribute("rel", "stylesheet")
+link.setAttribute("type", "text/css")
+link.setAttribute("href", object.data.html_url)
 return userCard;
 
 
 }
 
-console.log(followersArray)
+// console.log(followersArray)
 
-followersArray.forEach((success) => {
-  let newName = success
-  console.log(newName)
+followersArray.forEach((object) => {
+  let newName = object
+  // console.log(newName)
    axios.get('https://api.github.com/users/' + `${newName}`)
- .then( success => {
-    console.log(success)
-    const newCard = userCard(success);
+ .then( object => {
+    console.log(object)
+    const newCard = userCard(object);
     entryPoint.appendChild(newCard);
   })
   .catch( err => {
