@@ -3,7 +3,14 @@
     (replacing the placeholder with your Github name):
     https://api.github.com/users/<your name>
 */
-
+axios.get('https://api.github.com/users/tonysorensen')
+.then( success => {
+  console.log(success)
+  return success
+})
+.catch( err => {
+  console.log(err)
+})
 /*
   STEP 2: Inspect and study the data coming back, this is YOUR
     github info! You will need to understand the structure of this
@@ -49,7 +56,41 @@ const followersArray = [];
       </div>
     </div>
 */
-
+const userCard = (success) => {
+  //create the elements
+const userCard = document.createElement('div')
+const avatar = document.createElement('img')
+const info = document.createElement('div')
+const name = document.createElement('h3')
+const userName = document.createElement('p')
+const userLocation = document.createElement('p')
+const profile = document.createElement('p')
+const link = document.createElement('a')
+const followers = document.createElement('p')
+const following = document.createElement('p')
+const bio = document.createElement('p')
+//format the elements
+userCard.appendChild(avatar)
+userCard.appendChild(info)
+info.appendChild(name)
+info.appendChild(userName)
+info.appendChild(userLocation)
+info.appendChild(profile)
+profile.appendChild(link)
+info.appendChild(followers)
+info.appendChild(following)
+info.appendChild(bio)
+//add the content
+avatar.src = avatar_url
+name.textContent = name
+userName.textContent = login
+userLocation.textContent = location
+link.textContent = html_url
+followers.textContent = followers
+following.textContent = following
+//add the classes
+console.log(link)
+}
 /*
   List of LS Instructors Github username's:
     tetondan
