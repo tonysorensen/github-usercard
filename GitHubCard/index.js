@@ -8,8 +8,6 @@ axios.get('https://api.github.com/users/tonysorensen')
   console.log(success)
   const newCard = userCard(success)
 entryPoint.appendChild(newCard)
-  
-  
 })
 .catch( err => {
   console.log(err)
@@ -28,11 +26,8 @@ entryPoint.appendChild(newCard)
 */
 const entryPoint = document.querySelector('.cards')
 
-// success.data.message.forEach(url => {
-//   const newCard = userCard(url);
-//   entryPoint.appendChild(newCard);
-// })
-/*
+
+/* 5
   STEP 5: Now that you have your own card getting added to the DOM, either
     follow this link in your browser https://api.github.com/users/<Your github name>/followers,
     manually find some other users' github handles, or use the list found at the
@@ -43,9 +38,9 @@ const entryPoint = document.querySelector('.cards')
     user, and adding that card to the DOM.
 */
 
-const followersArray = [];
+const followersArray = ['LoganSorensen','peterevilla','tetondan','dustinmyers','LukeSmithxyz'];
 
-/*
+/* 3
   STEP 3: Create a function that accepts a single object as its only argument.
     Using DOM methods and properties, create and return the following markup:
 
@@ -107,6 +102,21 @@ return userCard;
 
 }
 
+console.log(followersArray)
+
+followersArray.forEach((success) => {
+  let newName = success
+  console.log(newName)
+   axios.get('https://api.github.com/users/' + `${newName}`)
+ .then( success => {
+    console.log(success)
+    const newCard = userCard(success);
+    entryPoint.appendChild(newCard);
+  })
+  .catch( err => {
+    console.log(err)
+  })
+})
 /*
   List of LS Instructors Github username's:
     tetondan
