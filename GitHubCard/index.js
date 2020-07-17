@@ -6,7 +6,10 @@
 axios.get('https://api.github.com/users/tonysorensen')
 .then( success => {
   console.log(success)
-  return success
+  const newCard = userCard(success)
+entryPoint.appendChild(newCard)
+  
+  
 })
 .catch( err => {
   console.log(err)
@@ -23,7 +26,12 @@ axios.get('https://api.github.com/users/tonysorensen')
   STEP 4: Pass the data received from Github into your function,
     and append the returned markup to the DOM as a child of .cards
 */
+const entryPoint = document.querySelector('.cards')
 
+// success.data.message.forEach(url => {
+//   const newCard = userCard(url);
+//   entryPoint.appendChild(newCard);
+// })
 /*
   STEP 5: Now that you have your own card getting added to the DOM, either
     follow this link in your browser https://api.github.com/users/<Your github name>/followers,
@@ -81,16 +89,24 @@ info.appendChild(followers)
 info.appendChild(following)
 info.appendChild(bio)
 //add the content
-avatar.src = avatar_url
-name.textContent = name
-userName.textContent = login
-userLocation.textContent = location
-link.textContent = html_url
-followers.textContent = followers
-following.textContent = following
+avatar.src = success.data.avatar_url
+name.textContent = success.data.name
+userName.textContent = success.data.login
+userLocation.textContent = success.data.location
+link.textContent = success.data.html_url
+followers.textContent = success.data.followers
+following.textContent = success.data.following
 //add the classes
-console.log(link)
+userCard.classList.add('card')
+info.classList.add('card-info')
+name.classList.add('name')
+userName.classList.add('username')
+
+return userCard;
+
+
 }
+
 /*
   List of LS Instructors Github username's:
     tetondan
